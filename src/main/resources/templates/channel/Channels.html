@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Channels</title>
+</head>
+<!--<ol>-->
+<!--    <li><a href="templates/channel/AddChannel.html" th:href="@{/channel/addChannel}">Add Channel</a></li>-->
+<!--    <li><a href="" th:href="@{/comment/comments}">All Comments</a></li>-->
+<!--    <li><a href="" th:href="@{/video/Videos}">All Videos</a></li>-->
+<!--    <li><a href="" th:href="@{/userprofile}"></a></li>-->
+<!--</ol>-->
+<body>
+<p th:each = "channel:${channels}" th:text="${channel.getName()}"></p>
+Hi ya rabotau
+</body>
+</html>
