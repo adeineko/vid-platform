@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <title>Channels</title>
 </head>
-<!--<ol>-->
-<!--    <li><a href="templates/channel/AddChannel.html" th:href="@{/channel/addChannel}">Add Channel</a></li>-->
-<!--    <li><a href="" th:href="@{/comment/comments}">All Comments</a></li>-->
-<!--    <li><a href="" th:href="@{/video/Videos}">All Videos</a></li>-->
-<!--    <li><a href="" th:href="@{/userprofile}"></a></li>-->
-<!--</ol>-->
 <body>
+<nav>
+    <a th:href="@{/}">Main page</a>
+    <a th:href="@{channels}">Channels</a>
+    <a th:href="@{comments}">Comments</a>
+    <a th:href="@{videos}">Videos</a>
+</nav>
 <p th:each = "channel:${channels}" th:text="${channel.getName()}"></p>
 Hi ya rabotau
 </body>
