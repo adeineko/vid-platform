@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +34,7 @@ public class ChannelJdbcTemplateRepository implements ChannelRepositoryJdbc {
         return jdbcTemplate.query("SELECT * FROM CHANNELS",
                 (rs, rowNum) -> new Channel(rs.getInt("id"),
                         rs.getString("name"),
-                        rs.getDate("date").toLocalDate(),
+                        rs.getDate("date") == null ? LocalDate.now() : rs.getDate("date").toLocalDate(),
                         rs.getInt("subscribers")
                 ));
     }
@@ -56,7 +57,7 @@ public class ChannelJdbcTemplateRepository implements ChannelRepositoryJdbc {
         return jdbcTemplate.query("SELECT * FROM CHANNELS WHERE NAME = ?",
                 (rs, rowNum) -> new Channel(rs.getInt("id"),
                         rs.getString("name"),
-                        rs.getDate("date").toLocalDate(),
+                        rs.getDate("date") == null ? LocalDate.now() : rs.getDate("date").toLocalDate(),
                         rs.getInt("subscribers")),
                 name);
     }
@@ -70,28 +71,16 @@ public class ChannelJdbcTemplateRepository implements ChannelRepositoryJdbc {
 
     @Override
     public Channel save(Channel channel) {
-//        PreparedStatementCreatorFactory pscf = new
-//                PreparedStatementCreatorFactory("INSERT INTO CHANNELS(ID, NAME,DATE, SUBSCRIBERS) VALUES (?, ?, ?,?)",
-//                Types.INTEGER,
-//                Types.VARCHAR,
-//                Types.DATE,
-//                Types.INTEGER);
-//        pscf.setReturnGeneratedKeys(true);
-//        PreparedStatementCreator psc =
-//                pscf.newPreparedStatementCreator(List.of(channel.getName(),
-//                        channel.getDate(),
-//                        channel.getSubscribers()));
-//        KeyHolder keyHolder = new GeneratedKeyHolder();
-//        jdbcTemplate.update(psc, keyHolder);
-//        channel.setId(keyHolder.getKey().intValue());
-//        return channel;
-        String sqlQuery = "INSERT INTO CHANNELS(ID, NAME, DATE, SUBSCRIBERS) " +
-                "VALUES (?, ?, ?, ?)";
+        String sqlQuery = "INSERT INTO CHANNELS( NAME, DATE, SUBSCRIBERS) " +
+                "VALUES ( ?, ?, ?)";
         jdbcTemplate.update(sqlQuery,
-                channel.getId(),
+               // channel.getId(),
                 channel.getName(),
                 channel.getDate(),
                 channel.getSubscribers());
+        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
+                .withTableName("channels")
+                .usingGeneratedKeyColumns("id");
         return channel;
     }
 

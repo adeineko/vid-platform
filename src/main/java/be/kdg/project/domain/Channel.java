@@ -1,10 +1,13 @@
 package be.kdg.project.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class Channel {
     private int id;
     private String name;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
     private int subscribers;
 
@@ -44,8 +47,9 @@ public class Channel {
 
     @Override
     public String toString() {
-        return "Channel{" +
-                "name='" + name +
+        return "Channel: " +
+                "id = " + id +"\n" +
+                "name = " + name +"\n" +
                 "date = " + date;
     }
 }
