@@ -16,10 +16,10 @@ public class DataFactory {
     private static List<Channel> channels;
 
     public static void seed() {
-        Channel channel1 = new Channel("Channel 1", LocalDate.now(), 10);
-        Channel channel2 = new Channel("Channel 2", LocalDate.now(), 10);
-        Channel channel3 = new Channel("Channel 3", LocalDate.now(), 10);
-        Channel channel4 = new Channel("Channel 4", LocalDate.now(), 10);
+        Channel channel1 = new Channel(1, "Channel 1", LocalDate.now(), 10);
+        Channel channel2 = new Channel(2, "Channel 2", LocalDate.now(), 10);
+        Channel channel3 = new Channel(3, "Channel 3", LocalDate.now(), 10);
+        Channel channel4 = new Channel(4, "Channel 4", LocalDate.now(), 10);
 
         Video video1 = new Video("Video 1", 100, 1000, VideoGenre.ACTION);
         video1.addChannel(channel1);

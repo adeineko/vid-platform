@@ -23,7 +23,6 @@ public class ChannelRepository {
 
     public Channel updateChannel(Channel channel) {
         List<Channel> channels = DataFactory.getChannels();
-
         for (int i = 0; i < channels.size(); i++) {
             Channel existingChannel = channels.get(i);
             if (existingChannel.getName().equals(channel.getName())) {

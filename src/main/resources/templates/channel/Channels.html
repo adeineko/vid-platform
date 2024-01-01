@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Channels</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
 <nav>
     <a th:href="@{/}">Main page</a>
-    <a th:href="@{channels}">Channels</a>
+    <a th:href="@{channel}">Channels</a>
     <a th:href="@{comments}">Comments</a>
     <a th:href="@{videos}">Videos</a>
 </nav>
-<p th:each = "channel:${channels}" th:text="${channel.getName()}"></p>
-Hi ya rabotau
+<p th:each="channel:${channels}" th:text="${channel.toString()}"></p>
+
+<a th:href="@{channels/add}" class="button">Add Channel</a>
+
 </body>
 </html>

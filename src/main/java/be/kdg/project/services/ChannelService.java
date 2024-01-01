@@ -12,5 +12,5 @@ public interface ChannelService {
     boolean deleteChannel(String name);
 
     public Channel updateChannel(Channel channel);
-    public void writeChannelsToJSON(List<Channel> observations);
+    public void writeChannelsToJSON(List<Channel> channels);
 }

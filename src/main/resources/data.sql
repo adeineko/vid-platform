@@ -1,0 +1,3 @@
+INSERT INTO CHANNELS(NAME, DATE, SUBSCRIBERS)
+VALUES ('Beyond Fireship', '2022-09-04', '329000'),
+       ('Tech Acad', '2017-03-28', '75000');
