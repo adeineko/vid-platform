@@ -45,11 +45,20 @@ public class Channel {
         return subscribers;
     }
 
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setSubscribers(int subscribers) {
+        this.subscribers = subscribers;
+    }
+
     @Override
     public String toString() {
         return "Channel: " +
                 "id = " + id +"\n" +
                 "name = " + name +"\n" +
-                "date = " + date;
+                "date = " + date + "\n" +
+                "subscribers = " + subscribers + "\n";
     }
 }

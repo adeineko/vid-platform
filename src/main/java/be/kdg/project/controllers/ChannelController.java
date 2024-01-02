@@ -33,13 +33,15 @@ public class ChannelController {
     @GetMapping("/add")
     public String getChannelPage(Model model) {
         model.addAttribute("getPage", new Channel());
+        System.out.println("sent:" + new Channel());
         return "channel/AddChannel";
     }
 
     @PostMapping("create")
     public String addChannel(@ModelAttribute Channel channel, Model model) {
         ChannelServiceJdbcImpl.addChannel(channel);
-        model.addAttribute("addChannel", new Channel());
+        model.addAttribute("getPage", new Channel());
+        System.out.println("get:" + channel);
         model.addAttribute("message", "Channel added!");
         return "channel/AddChannel";
     }

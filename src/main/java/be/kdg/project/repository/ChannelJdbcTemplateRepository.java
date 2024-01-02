@@ -78,6 +78,9 @@ public class ChannelJdbcTemplateRepository implements ChannelRepositoryJdbc {
                 channel.getName(),
                 channel.getDate(),
                 channel.getSubscribers());
+        System.out.println(
+                "name, date, subscribers: " + channel.getName() + ", " + channel.getDate() + "," + channel.getSubscribers()
+        );
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("channels")
                 .usingGeneratedKeyColumns("id");

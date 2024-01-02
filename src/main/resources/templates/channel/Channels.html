@@ -11,31 +11,31 @@
 <body>
 <!-- Navbar Fragment -->
 <div th:replace="~{fragments/navbar :: navbar}"></div>
-
-<div class="table-responsive">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Joined</th>
-            <th>Subscribers</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="channel:${channels}">
-            <td th:text="${channel.id}"></td>
-            <td>
-                <a th:text="${channel.name}" th:href="@{/channels/{id}(id=${channel.id})}"></a>
-            </td>
-            <td th:text="${channel.date}"></td>
-            <td th:text="${channel.subscribers}"></td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Joined</th>
+                <th>Subscribers</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="channel:${channels}">
+                <td th:text="${channel.id}"></td>
+                <td>
+                    <a th:text="${channel.name}" th:href="@{/channels/{id}(id=${channel.id})}"></a>
+                </td>
+                <td th:text="${channel.date}"></td>
+                <td th:text="${channel.subscribers}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <a th:href="@{channels/add}" class="btn btn-outline-dark" tabindex="-1" role="button">Add Channel</a>
 </div>
-<a th:href="@{channels/add}" class="btn btn-outline-dark" tabindex="-1" role="button">Add Channel</a>
-
 <!-- Footer Fragment -->
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
