@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Main page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title data-th-text="#{label.title}"></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
           crossorigin="anonymous">
@@ -15,9 +15,32 @@
 
 <div class="container mt-3">
     <div class="jumbotron">
-        <h2 class="display-4">Welcome to my platform with videos and channels!</h2>
-        <p>Search for videos and corresponding channels easily.</p>
+        <h2 class="display-4" th:text="#{greetings}"></h2>
+        <p th:text="#{label.desc}"></p>
     </div>
+
+    <div>
+        <label th:text="#{label.lang}"></label>
+        <select id="locales" class="form-select">
+            <option value=""></option>
+            <option value="en" th:text="#{label.en}" ></option>
+            <option value="de" th:text="#{label.de}"></option>
+        </select>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#locales").change(function () {
+                var selectedOption = $('#locales').val();
+                if (selectedOption != ''){
+                    window.location.replace('?lang=' + selectedOption);
+                }
+            });
+        });
+    </script>
+
 </div>
 
 <!-- Footer Fragment -->

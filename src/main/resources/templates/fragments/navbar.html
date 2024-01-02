@@ -12,17 +12,17 @@
 <div th:fragment="navbar">
     <nav class="navbar navbar-expand-lg navbar-light bg-info-subtle">
         <div class="container-fluid">
-            <a class="navbar-brand" th:href="@{/}">Main page</a>
+            <a class="navbar-brand" th:href="@{/}" th:text="#{label.title}">Main page</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/channels}">Channels</a>
+                    <li class="nav-item" >
+                        <a class="nav-link" th:href="@{/channels}" th:text="#{page.channels}">Channels</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/comments}">Comments</a>
+                        <a class="nav-link" th:href="@{/comments}" th:text="#{page.comment}">Comments</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/videos}">Videos</a>
+                        <a class="nav-link" th:href="@{/videos}" th:text="#{page.video}">Videos</a>
                     </li>
                 </ul>
             </div>
