@@ -63,7 +63,7 @@ public class ChannelJdbcTemplateRepository implements ChannelRepositoryJdbc {
     }
 
     @Override
-    public Channel findById(int id) {
+    public Channel findById(Long id) {
         return jdbcTemplate.queryForObject("SELECT * FROM CHANNELS WHERE ID = ?",
                 this::mapRow,
                 id);

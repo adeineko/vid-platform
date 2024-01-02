@@ -8,6 +8,6 @@ public interface ChannelRepositoryJdbc {
     List<Channel> showAllChannels();
     Channel createChannel(Channel channel);
     List<Channel> findByName(String name);
-    Channel findById(int id);
+    Channel findById(Long id);
     Channel save(Channel channel);
 }

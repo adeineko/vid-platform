@@ -8,4 +8,5 @@ public interface ChannelServiceJdbc {
 
     public List<Channel> showChannels();
     public Channel addChannel(Channel channel);
+    public Channel getChannel(Long id);
 }

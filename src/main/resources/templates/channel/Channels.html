@@ -13,7 +13,7 @@
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
 <div class="table-responsive">
-    <table class="table table-striped table-bordered">
+    <table class="table table-hover">
         <thead>
         <tr>
             <th>Id</th>
@@ -24,10 +24,12 @@
         </thead>
         <tbody>
         <tr th:each="channel:${channels}">
-            <td th:text="${channel.getId()}"></td>
-            <td th:text="${channel.getName()}"></td>
-            <td th:text="${channel.getDate()}"></td>
-            <td th:text="${channel.getSubscribers()}"></td>
+            <td th:text="${channel.id}"></td>
+            <td>
+                <a th:text="${channel.name}" th:href="@{/channels/{id}(id=${channel.id})}"></a>
+            </td>
+            <td th:text="${channel.date}"></td>
+            <td th:text="${channel.subscribers}"></td>
         </tr>
         </tbody>
     </table>

@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/channels")
@@ -27,6 +24,11 @@ public class ChannelController {
         model.addAttribute("channels", ChannelServiceJdbcImpl.showChannels());
         return "channel/Channels";
     }
+    @GetMapping("/{id}")
+    public String getChannel(Model model, @PathVariable(value = "id") Long id) {
+        model.addAttribute("channel", ChannelServiceJdbcImpl.getChannel(id));
+        return "channel/details";
+    }
 
     @GetMapping("/add")
     public String getChannelPage(Model model) {
@@ -41,4 +43,5 @@ public class ChannelController {
         model.addAttribute("message", "Channel added!");
         return "channel/AddChannel";
     }
+
 }

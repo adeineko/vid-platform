@@ -26,4 +26,9 @@ public class ChannelServiceJdbcImpl implements ChannelServiceJdbc {
     public Channel addChannel(Channel channel) {
         return channelRepositoryJdbc.save(channel);
     }
+
+    @Override
+    public Channel getChannel(Long id) {
+        return channelRepositoryJdbc.findById(id);
+    }
 }
