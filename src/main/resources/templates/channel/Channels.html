@@ -20,6 +20,7 @@
                 <th>Name</th>
                 <th>Joined</th>
                 <th>Subscribers</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -30,6 +31,11 @@
                 </td>
                 <td th:text="${channel.date}"></td>
                 <td th:text="${channel.subscribers}"></td>
+                <td>
+                    <form th:action="@{'/channels/delete/' + ${channel.id}}" th:method="post">
+                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                    </form>
+                </td>
             </tr>
             </tbody>
         </table>

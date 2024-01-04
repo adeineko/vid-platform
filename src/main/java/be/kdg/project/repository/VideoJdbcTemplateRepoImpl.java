@@ -3,9 +3,11 @@ package be.kdg.project.repository;
 import be.kdg.project.domain.Channel;
 import be.kdg.project.domain.Video;
 import be.kdg.project.domain.VideoGenre;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,19 +66,39 @@ public class VideoJdbcTemplateRepoImpl implements VideoRepositoryJdbc {
         String sqlQuery = "INSERT INTO VIDEOS( TITLE, VIEWS, LINK, GENRE) " +
                 "VALUES ( ?, ?, ?, ?)";
         jdbcTemplate.update(sqlQuery,
-                // channel.getId(),
                 video.getTitle(),
                 video.getViews(),
                 video.getLink(),
-                video.getGenre().toString());
+                video.getGenre().getDisplayValue()
+               // video.getChannel().getId()
+        );
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
-                .withTableName("channels")
+                .withTableName("videos")
                 .usingGeneratedKeyColumns("id");
         return video;
     }
+    public Video saveChId( Video video) {
+        String sqlQuery2 = "INSERT INTO CHANNEL_VIDEO_RELATION(VIDEO_ID, CHANNEL_ID) " +
+                "VALUES (?,?)";
+        jdbcTemplate.update(sqlQuery2,
+                video.getId(),
+                video.getChannel().getId()
+        );
+        return video;
+    }
+
 
     @Override
     public Video deleteById(Long id) {
-        return null;
+        Video videoToDelete = findById(id);
+
+        if (videoToDelete != null) {
+            jdbcTemplate.update("DELETE FROM CHANNEL_VIDEO_RELATION WHERE VIDEO_ID = ?", id);
+            jdbcTemplate.update("DELETE FROM VIDEOS WHERE id = ?", id);
+
+            return videoToDelete;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Video with ID " + id + " not found");
+        }
     }
 }

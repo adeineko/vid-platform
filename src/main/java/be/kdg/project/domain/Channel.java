@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class Channel {
     private int id;
     private String name;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+
     private LocalDate date;
     @PositiveOrZero(message = "Subscribers must be a non-negative number")
     private int subscribers;

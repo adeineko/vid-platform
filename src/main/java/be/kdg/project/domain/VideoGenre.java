@@ -1,9 +1,18 @@
 package be.kdg.project.domain;
 
 public enum VideoGenre {
-    ACTION,
-    COMEDY,
-    HORROR,
-    MUSIC,
-    EDUCATIONAL
+    Action("Action"),
+    Comedy("Comedy"),
+    Horror("Horror"),
+    Music("Music"),
+    Educational("Educational"),;
+    private final String displayValue;
+
+    private VideoGenre(String displayValue) {
+        this.displayValue = displayValue;
+    }
+
+    public String getDisplayValue() {
+        return displayValue;
+    }
 }

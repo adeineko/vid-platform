@@ -1,10 +1,15 @@
 package be.kdg.project.repository;
 
 import be.kdg.project.domain.Channel;
+import be.kdg.project.domain.Video;
+import be.kdg.project.domain.VideoGenre;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,6 +40,24 @@ public class ChannelJdbcTemplateRepository implements ChannelRepositoryJdbc {
     }
 
     @Override
+    public List<Video> showVideosByChannelId(Long channelId) {
+        String sql = "SELECT V.* " +
+                "FROM VIDEOS V " +
+                "INNER JOIN CHANNEL_VIDEO_RELATION CVR ON V.ID = CVR.VIDEO_ID " +
+                "WHERE CVR.CHANNEL_ID = ?";
+
+        return jdbcTemplate.query(sql,
+                (rs, rowNum) -> new Video(
+                        rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getInt("views"),
+                        rs.getString("link"),
+                        VideoGenre.valueOf(rs.getString("genre"))
+                ),
+                channelId);
+    }
+
+    @Override
     public List<Channel> findByName(String name) {
         return jdbcTemplate.query("SELECT * FROM CHANNELS WHERE NAME = ?",
                 (rs, rowNum) -> new Channel(rs.getInt("id"),
@@ -43,6 +66,7 @@ public class ChannelJdbcTemplateRepository implements ChannelRepositoryJdbc {
                         rs.getInt("subscribers")),
                 name);
     }
+
 
     @Override
     public Channel findById(Long id) {
@@ -67,20 +91,21 @@ public class ChannelJdbcTemplateRepository implements ChannelRepositoryJdbc {
     }
 
     @Override
+    @Transactional
     public Channel deleteById(Long id) {
-        String sqlQuery = "DELETE FROM CHANNELS WHERE ID = ?";
+        Channel channelToDelete = findById(id);
 
-        int deletedRows = jdbcTemplate.update(sqlQuery, id);
+        if (channelToDelete != null) {
+            jdbcTemplate.update("DELETE FROM CHANNEL_VIDEO_RELATION WHERE CHANNEL_ID = ?", id);
+            jdbcTemplate.update("DELETE FROM CHANNELS WHERE id = ?", id);
 
-        // Check if any rows were deleted
-        if (deletedRows > 0) {
-            // If rows were deleted, return the deleted channel
-            Channel deletedChannel = findById(id);
-            return deletedChannel;
+            return channelToDelete;
         } else {
-            // If no rows were deleted, return null or throw an exception, depending on your requirements
-            return null;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Channel with ID " + id + " not found");
         }
+    }
+    private void deleteVideosForChannel(Long channelId) {
+        jdbcTemplate.update("DELETE FROM CHANNEL_VIDEO_RELATION WHERE CHANNEL_ID = ?", channelId);
     }
 
     private Channel mapRow(ResultSet rs, int i) throws SQLException {
@@ -89,6 +114,4 @@ public class ChannelJdbcTemplateRepository implements ChannelRepositoryJdbc {
                 rs.getDate("date").toLocalDate(),
                 rs.getInt("subscribers"));
     }
-
-
 }

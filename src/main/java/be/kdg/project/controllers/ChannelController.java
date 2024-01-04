@@ -1,6 +1,7 @@
 package be.kdg.project.controllers;
 
 import be.kdg.project.domain.Channel;
+import be.kdg.project.services.ChannelServiceJdbc;
 import be.kdg.project.services.ChannelServiceJdbcImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 @RequestMapping("/channels")
@@ -26,24 +29,23 @@ public class ChannelController {
         model.addAttribute("channels", ChannelServiceJdbcImpl.showChannels());
         return "channel/Channels";
     }
-    @DeleteMapping("delete/{id}")
-    public ResponseEntity<HttpStatus> deleteChannel(@PathVariable(value = "id") Long id) {
-       ChannelServiceJdbcImpl.deleteChannel(id);
-//        model.addAttribute("channels", deletedChannel);
-//        model.addAttribute("channels", "Channel deleted!");
-//        if (deletedChannel != null) {
-//            model.addAttribute("message", "Channel deleted!");
-//        } else {
-//            model.addAttribute("message", "Channel not found or unable to delete.");
-//        }
-
-        // Redirect to the channels page after deletion
-        return new ResponseEntity<>(HttpStatus.OK);
-//        return "channel/Channels";
+    @PostMapping("delete/{id}")
+    public String deleteChannel(@PathVariable(value = "id") Long id) {
+        try {
+            ChannelServiceJdbcImpl.deleteChannel(id);
+            return "redirect:/channels";
+        } catch (ResponseStatusException e) {
+            // case where the entity with the specified ID doesn't exist
+            if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
+                return "redirect:/channels?error=notfound";
+            }
+            return "redirect:/channels?error=server";
+        }
     }
 
     @GetMapping("/{id}")
     public String getChannel(Model model, @PathVariable(value = "id") Long id) {
+        model.addAttribute("videos", ChannelServiceJdbcImpl.findVideosByChannelId(id));
         model.addAttribute("channel", ChannelServiceJdbcImpl.getChannel(id));
         return "channel/details";
     }
@@ -57,7 +59,6 @@ public class ChannelController {
     @PostMapping("create")
     public String addChannel(@Valid @ModelAttribute Channel channel, BindingResult errors, Model model) {
         if (errors.hasErrors()) {
-//            errors.getAllErrors().forEach(error -> System.out.println(error.getDefaultMessage()));
             model.addAttribute("getPage", new Channel());
             model.addAttribute("message2", errors.getAllErrors().stream().findFirst().orElse(null).getDefaultMessage());
             return "channel/AddChannel";

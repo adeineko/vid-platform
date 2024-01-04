@@ -13,4 +13,5 @@ public interface VideoServiceJdbc {
     public Video deleteVideo(Long id);
 
     public Video getVideo(Long id);
+    public Video saveChannelId(Video video);
 }
