@@ -28,6 +28,11 @@ public class ChannelServiceJdbcImpl implements ChannelServiceJdbc {
     }
 
     @Override
+    public Channel deleteChannel(Long id) {
+        return channelRepositoryJdbc.deleteById(id);
+    }
+
+    @Override
     public Channel getChannel(Long id) {
         return channelRepositoryJdbc.findById(id);
     }

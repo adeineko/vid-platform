@@ -13,6 +13,14 @@
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 <div class="container">
 <form th:action="create" th:method="post" th:object="${getPage}">
+
+<!--    <div th:if="${#fields.hasErrors('subscribers')}" class="alert alert-danger" role="alert">-->
+<!--        <p>Form submission has errors:</p>-->
+<!--        <ul>-->
+<!--            <li th:each="error : ${#fields.errors()}" th:text="${error}"></li>-->
+<!--        </ul>-->
+<!--    </div>-->
+
     <div class="mb-3">
         <label for="name" class="form-label">Name:</label>
         <input type="text" th:field="*{name}" id="name" name="name" class="form-control" required>
@@ -29,13 +37,18 @@
                required>
     </div>
 
-    <button type="submit" class="btn btn-primary">Add</button>
+    <button type="submit" class="btn btn-outline-dark">Add</button>
 
 </form>
-
-<div class="mt-3">
-    <p th:text="${message}">message</p>
 </div>
+<div th:if="${message}" class="alert alert-success alert-dismissible fade show container mt-3" role="alert">
+    <p th:text="${message}"></p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div th:if="${message2}" class="alert alert-danger alert-dismissible fade show container mt-3" role="alert">
+    <p th:text="${message2}"></p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 <!-- Footer Fragment -->
 <div th:replace="~{fragments/footer :: footer}"></div>

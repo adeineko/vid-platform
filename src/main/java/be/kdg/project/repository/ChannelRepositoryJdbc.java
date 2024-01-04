@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface ChannelRepositoryJdbc {
     List<Channel> showAllChannels();
-    Channel createChannel(Channel channel);
     List<Channel> findByName(String name);
     Channel findById(Long id);
     Channel save(Channel channel);
+    Channel deleteById(Long id);
 }

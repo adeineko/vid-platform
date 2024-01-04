@@ -21,15 +21,15 @@ public class DataFactory {
         Channel channel3 = new Channel(3, "Channel 3", LocalDate.now(), 10);
         Channel channel4 = new Channel(4, "Channel 4", LocalDate.now(), 10);
 
-        Video video1 = new Video("Video 1", 100, 1000, VideoGenre.ACTION);
+        Video video1 = new Video(1, "Video 1", 100, "link1", VideoGenre.ACTION);
         video1.addChannel(channel1);
         video1.addChannel(channel4);
-        Video video2 = new Video("Video 1", 100, 1000, VideoGenre.ACTION);
+        Video video2 = new Video(2, "Video 1", 100, "link2", VideoGenre.ACTION);
         video2.addChannel(channel2);
         video2.addChannel(channel3);
-        Video video3 = new Video("Video 1", 100, 1000, VideoGenre.ACTION);
+        Video video3 = new Video(3, "Video 1", 100, "link3", VideoGenre.ACTION);
         video3.addChannel(channel3);
-        Video video4 = new Video("Video 1", 100, 1000, VideoGenre.ACTION);
+        Video video4 = new Video(4, "Video 1", 100, "link4", VideoGenre.ACTION);
         video4.addChannel(channel4);
 
         Comment comment1 = new Comment("Comment 1");

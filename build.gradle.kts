@@ -33,6 +33,7 @@ dependencies {
 	implementation("org.hibernate.validator:hibernate-validator:8.0.0.Final")
 	implementation("org.postgresql:postgresql:42.6.0")
 	implementation("org.webjars:bootstrap:5.3.2")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 }
 
 tasks.withType<Test> {

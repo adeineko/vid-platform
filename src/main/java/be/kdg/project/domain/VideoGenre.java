@@ -4,5 +4,6 @@ public enum VideoGenre {
     ACTION,
     COMEDY,
     HORROR,
-    MUSIC;
+    MUSIC,
+    EDUCATIONAL
 }

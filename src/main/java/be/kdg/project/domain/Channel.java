@@ -1,5 +1,6 @@
 package be.kdg.project.domain;
 
+import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -9,6 +10,7 @@ public class Channel {
     private String name;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
+    @PositiveOrZero(message = "Subscribers must be a non-negative number")
     private int subscribers;
 
     public Channel(int id, String name, LocalDate date, int subscribers) {

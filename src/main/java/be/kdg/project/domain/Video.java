@@ -4,20 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Video {
+    private int id;
     private String title;
     private int views;
-    private double revenue;
+    private String link;
     private VideoGenre genre;
     private List<Channel> channels;
 
-    public Video(String title, int views, double revenue, VideoGenre genre) {
+    public Video(int id, String title, int views, String link, VideoGenre genre) {
+        this.id = id;
         this.title = title;
         this.views = views;
-        this.revenue = revenue;
+        this.link = link;
         this.genre = genre;
         channels = new ArrayList<>();
     }
 
+    public Video() {
+
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public String getTitle() {
         return title;
@@ -27,8 +40,25 @@ public class Video {
         return views;
     }
 
-    public double getRevenue() {
-        return revenue;
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
+
+
+    public void setGenre(VideoGenre genre) {
+        this.genre = genre;
     }
 
     public VideoGenre getGenre() {
@@ -44,7 +74,7 @@ public class Video {
     }
 
     public void addChannel(Channel channel) {
-        if (this.channels == null){
+        if (this.channels == null) {
             this.channels = new ArrayList<>();
         }
         this.channels.add(channel);
