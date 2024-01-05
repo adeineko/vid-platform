@@ -70,19 +70,25 @@ public class VideoJdbcTemplateRepoImpl implements VideoRepositoryJdbc {
                 video.getViews(),
                 video.getLink(),
                 video.getGenre().getDisplayValue()
-               // video.getChannel().getId()
         );
+
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("videos")
                 .usingGeneratedKeyColumns("id");
+//        String sqlQuery2 = "INSERT INTO CHANNEL_VIDEO_RELATION(VIDEO_ID, CHANNEL_ID)" +
+//                "VALUES (?,?)";
+//        jdbcTemplate.update(sqlQuery2,
+//                video.getId(),
+//                video.getChannel().getId()
+//        );
         return video;
     }
-    public Video saveChId( Video video) {
-        String sqlQuery2 = "INSERT INTO CHANNEL_VIDEO_RELATION(VIDEO_ID, CHANNEL_ID) " +
+    public Video saveChId(Video video) {
+        String sqlQuery2 = "INSERT INTO CHANNEL_VIDEO_RELATION(VIDEO_ID, CHANNEL_ID)" +
                 "VALUES (?,?)";
         jdbcTemplate.update(sqlQuery2,
                 video.getId(),
-                video.getChannel().getId()
+                video.getChannel()
         );
         return video;
     }

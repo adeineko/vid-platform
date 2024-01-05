@@ -41,12 +41,14 @@ public class VideoController {
     @PostMapping("create")
     public String addVideo(@Valid @ModelAttribute Video video, BindingResult errors, Model model) {
         if (errors.hasErrors()) {
+            model.addAttribute("channels", channelServiceJdbc.showChannels());
             model.addAttribute("getPage", new Video());
             model.addAttribute("message2", errors.getAllErrors().stream().findFirst().orElse(null).getDefaultMessage());
             return "video/AddVideos";
         }
         videoServiceJdbc.addVideo(video);
-        videoServiceJdbc.saveChannelId(video);
+//        videoServiceJdbc.saveChannelId(video);
+        model.addAttribute("channels", channelServiceJdbc.showChannels());
         model.addAttribute("getPage", new Video());
         model.addAttribute("message", "Video added!");
         return "video/AddVideos";

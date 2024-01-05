@@ -17,7 +17,8 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 
 	implementation("org.webjars:bootstrap:5.3.2")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")

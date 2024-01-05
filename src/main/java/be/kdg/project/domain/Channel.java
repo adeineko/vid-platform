@@ -1,15 +1,21 @@
 package be.kdg.project.domain;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-
+@Entity
+@Table(name = "CHANNELS")
 public class Channel {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "NAME")
     private String name;
-
+    @Column(name = "DATE")
     private LocalDate date;
+    @Column(name = "SUBSCRIBERS")
     @PositiveOrZero(message = "Subscribers must be a non-negative number")
     private int subscribers;
 
