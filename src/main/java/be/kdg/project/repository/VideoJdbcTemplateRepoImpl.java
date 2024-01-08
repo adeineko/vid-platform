@@ -1,6 +1,5 @@
 package be.kdg.project.repository;
 
-import be.kdg.project.domain.Channel;
 import be.kdg.project.domain.Video;
 import be.kdg.project.domain.VideoGenre;
 import org.springframework.http.HttpStatus;
@@ -83,15 +82,15 @@ public class VideoJdbcTemplateRepoImpl implements VideoRepositoryJdbc {
 //        );
         return video;
     }
-    public Video saveChId(Video video) {
-        String sqlQuery2 = "INSERT INTO CHANNEL_VIDEO_RELATION(VIDEO_ID, CHANNEL_ID)" +
-                "VALUES (?,?)";
-        jdbcTemplate.update(sqlQuery2,
-                video.getId(),
-                video.getChannel()
-        );
-        return video;
-    }
+//    public Video saveChId(Video video) {
+//        String sqlQuery2 = "INSERT INTO CHANNEL_VIDEO_RELATION(VIDEO_ID)" +
+//                "VALUES (?)";
+//        jdbcTemplate.update(sqlQuery2,
+//                video.getId()
+//               // video.getChannel()
+//        );
+//        return video;
+//    }
 
 
     @Override

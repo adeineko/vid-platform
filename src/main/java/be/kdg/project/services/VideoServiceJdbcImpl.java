@@ -36,8 +36,8 @@ public class VideoServiceJdbcImpl implements VideoServiceJdbc {
         return videoRepositoryJdbc.findById(id);
     }
 
-    @Override
-    public Video saveChannelId(Video video) {
-        return videoRepositoryJdbc.saveChId(video);
-    }
+//    @Override
+//    public Video saveChannelId(Video video) {
+//        return videoRepositoryJdbc.saveChId(video);
+//    }
 }

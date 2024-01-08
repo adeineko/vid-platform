@@ -11,5 +11,5 @@ public interface VideoRepositoryJdbc {
     Video findById(Long id);
     Video save(Video video);
     Video deleteById(Long id);
-    Video saveChId(Video video);
+//    Video saveChId(Video video);
 }

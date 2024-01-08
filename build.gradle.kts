@@ -35,6 +35,7 @@ dependencies {
 	implementation("org.postgresql:postgresql:42.6.0")
 	implementation("org.webjars:bootstrap:5.3.2")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
+	implementation("org.postgresql:postgresql")
 }
 
 tasks.withType<Test> {

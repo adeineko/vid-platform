@@ -35,6 +35,7 @@ public class VideoController {
     public String getVideoPage(Model model) {
         model.addAttribute("getPage", new Video());
         model.addAttribute("channels", channelServiceJdbc.showChannels());
+//        model.addAttribute("addChannel", channelServiceJdbc.showChannels());
         return "video/AddVideos";
     }
 
@@ -47,7 +48,7 @@ public class VideoController {
             return "video/AddVideos";
         }
         videoServiceJdbc.addVideo(video);
-//        videoServiceJdbc.saveChannelId(video);
+       // videoServiceJdbc.saveChannelId(video);
         model.addAttribute("channels", channelServiceJdbc.showChannels());
         model.addAttribute("getPage", new Video());
         model.addAttribute("message", "Video added!");

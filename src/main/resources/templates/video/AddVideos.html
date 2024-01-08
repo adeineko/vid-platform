@@ -40,13 +40,14 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="link" class="form-label">Choose channel:</label>
-            <select name="channels">
-                <option th:each="channels : ${channels}"
-                        th:value="${channels}" th:text="${channels.name}" th:field="*{channel}"></option>`
+            <label for="channels" class="form-label">Choose channel:</label>
+            <select name="channels" id="channels">
+                <option th:each="channel : ${channels}"
+                        th:value="${channel}" th:text="${channel.name}"></option>
             </select>
         </div>
-<!--    <div class="container"></div>-->
+        <p>No existing channel? Add channel first.</p>
+
         <button type="submit" class="btn btn-outline-dark">Add</button>
 
     </form>

@@ -5,6 +5,9 @@ import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Set;
+
 @Entity
 @Table(name = "CHANNELS")
 public class Channel {
@@ -18,6 +21,9 @@ public class Channel {
     @Column(name = "SUBSCRIBERS")
     @PositiveOrZero(message = "Subscribers must be a non-negative number")
     private int subscribers;
+
+    @ManyToMany(mappedBy = "channels")
+    Set<Video> videos;
 
     public Channel(int id, String name, LocalDate date, int subscribers) {
         this.id = id;
@@ -69,4 +75,5 @@ public class Channel {
                 "date = " + date + "\n" +
                 "subscribers = " + subscribers + "\n";
     }
+
 }

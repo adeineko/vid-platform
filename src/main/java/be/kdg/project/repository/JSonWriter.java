@@ -39,7 +39,7 @@ public class JSonWriter {
         try (FileWriter writer = new FileWriter(VIDEOS_JSON)) {
             writer.write(json);
         } catch (IOException e) {
-            throw new RuntimeException("Unable to save astro-objects to JSON", e);
+            throw new RuntimeException("Unable to save objects to JSON", e);
         }
     }
 }

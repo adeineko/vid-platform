@@ -21,8 +21,7 @@ public class Video {
     @Column(name = "genre")
     @Enumerated(EnumType. STRING)
     private VideoGenre genre;
-    @Column(name = "channel_id")
-    private int channel;
+
     @ManyToMany
     @JoinTable(
             name = "CHANNEL_VIDEO_RELATION",
@@ -36,7 +35,7 @@ public class Video {
         this.views = views;
         this.link = link;
         this.genre = genre;
-        this.channel = channel;
+       // this.channel = channel;
     }
 
     public Video(int id, String title, int views, String link, VideoGenre genre) {
@@ -95,13 +94,13 @@ public class Video {
         this.genre = genre;
     }
 
-    public int getChannel() {
-        return channel;
-    }
+//    public int getChannel() {
+     //   return channel;
+   // }
 
-    public void setChannel(int channel) {
-        this.channel = channel;
-    }
+   // public void setChannel(int channel) {
+//        this.channel = channel;
+//    }
 
     @Override
     public String toString() {
@@ -109,7 +108,7 @@ public class Video {
                 "title='" + title + '\'' +
                 ", views=" + views +
                 ", link='" + link + '\'' +
-                ", genre=" + genre +
-                ", channels=" + channel;
+                ", genre=" + genre;
+//                ", channels=" + channel;
     }
 }
